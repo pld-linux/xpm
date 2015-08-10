@@ -5,11 +5,12 @@
 Summary:	Cross package maker. DEB/RPM generation or conversion
 Name:		xpm
 Version:	1.3.3.6
-Release:	0.1
+Release:	0.2
 License:	MIT-like
 Group:		Development/Languages
 Source0:	http://fossil.include-once.org/xpm/tarball/%{name}-%{version}.tar.gz?uuid=v%{version}&/%{name}-%{version}.tar.gz
 # Source0-md5:	f73ececfa6725965fc41d4e11ea85992
+Patch0:	templates.patch
 URL:		http://fossil.include-once.org/xpm/
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
@@ -48,12 +49,17 @@ It creates or converts between:
 
 %prep
 %setup -q
+%patch0 -p1
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
+
+# cleanup backups after patching
+find '(' -name '*~' -o -name '*.orig' ')' -print0 | xargs -0 -r -l512 rm -f
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir},%{_bindir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+cp -a templates $RPM_BUILD_ROOT%{ruby_vendorlibdir}/fpm
 cp -a bin/* $RPM_BUILD_ROOT%{_bindir}
 
 %clean
