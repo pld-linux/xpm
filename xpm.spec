@@ -8,9 +8,9 @@ Version:	1.3.3.6
 Release:	0.2
 License:	MIT-like
 Group:		Development/Languages
-Source0:	http://fossil.include-once.org/xpm/tarball/%{name}-%{version}.tar.gz?uuid=v%{version}&/%{name}-%{version}.tar.gz
+Source0:	http://fossil.include-once.org/xpm/tarball/%{name}-%{version}.tar.gz?uuid=v%{version}&/xpm-%{version}.tar.gz
 # Source0-md5:	f73ececfa6725965fc41d4e11ea85992
-Patch0:	templates.patch
+Patch0:		templates.patch
 URL:		http://fossil.include-once.org/xpm/
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
