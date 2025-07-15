@@ -49,7 +49,7 @@ It creates or converts between:
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
 # cleanup backups after patching
